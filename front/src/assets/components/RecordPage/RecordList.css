@@ -1,0 +1,80 @@
+.record_page {
+  float: left;
+  padding: 1rem;
+  width: 97%;
+}
+/* 全体フォーマット 隙間*/
+.record_list {
+  display: grid;
+  gap: 1.5rem;
+  /* width: 100%; */
+  /* max-width: 1000px; */
+  margin: 0;
+}
+
+/* カードにしたい */
+.record_item {
+  background: #d8fbcb;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* ヘッダー部：日付・種類・評価を左右配置 */
+.record_header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.75rem;
+}
+
+.record_header .record_date,
+.record_header .record_type {
+  margin-right: 0.5rem;
+  font-weight: bold;
+}
+
+.record_header .record_rating {
+  margin-left: auto;
+  color: #e07c24;
+}
+
+/* コメント */
+.record_content {
+  margin: 0 0 0.75rem 0;
+  line-height: 1.4;
+  color: #333;
+}
+
+/* 写真 */
+.record_photo {
+  max-width: 100%;
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+  object-fit: cover;
+}
+
+/* 追加情報 */
+.record_extra {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 0.75rem;
+}
+
+/* タイプ別 */
+.record_meal_type,
+.child_activity,
+.child_age,
+.record_brand,
+.record_salon,
+.record_date_place {
+  font-size: 0.9rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
