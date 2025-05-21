@@ -15,7 +15,7 @@
 1.　依存パッケージをインストールする：ルートディレクトリで実行<br>
   　　`npm i`<br>
 2. .envファイルを作成　：　ルートディレクトリで実行<br>
-　　`cp .env.example .env`<br>
+　　`touch .env`<br>
    (必須設定項目)<br>
    IMGBB_API_KEY(imgbbに画像をアップロードする為のAPIキーです。ご自身で発行してください。)　https://imgbb.com/login<br>
    DATABASE_URL<br>
