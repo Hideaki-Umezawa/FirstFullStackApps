@@ -12,22 +12,22 @@
 
 # setup
 
-1.　依存パッケージをインストールする<br>
+1.　依存パッケージをインストールする：ルートディレクトリで実行<br>
   　　`npm i`<br>
-2. .envファイルを作成<br>
+2. .envファイルを作成　：　ルートディレクトリで実行<br>
 　　`cp .env.example .env`<br>
    (必須設定項目)<br>
    IMGBB_API_KEY(imgbbに画像をアップロードする為のAPIキーです。ご自身で発行してください。)　https://imgbb.com/login<br>
-   DATABASE_URL=5432<br>
+   DATABASE_URL<br>
    
-4. DB構築<br>
+3. DB構築：　ルートディレクトリで実行<br>
    `npm run restart`<br>
 
-5. ローカルサーバーを起動<br>
-バックエンド　:　ルート上で実行<br>
+4. ローカルサーバーを起動<br>
+バックエンド　:　ルートディレクトリで実行<br>
    `npm run dev`<br>
    
-   フロントエンド　:　frontディレクトリに移動して実行<br>
+   フロントエンド　:　frontディレクトリで実行<br>
    `npm run dev`<br>
 
 
