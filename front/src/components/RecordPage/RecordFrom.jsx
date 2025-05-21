@@ -10,7 +10,7 @@ function RecordFrom({ fetchRecord }) {
   const [record_mood, setMood] = useState("");
   const [record_comment, setComment] = useState("");
   const [record_rating, setRating] = useState(5);
-  // const [record_photo_url, setFile] = useState(null);
+  const [record_photo_url, setFile] = useState(null);
 
   // prettier-ignore
   const recordMoodArray = ["楽しい","疲れた","リラックス","ワクワク","悲しい",];
@@ -36,47 +36,48 @@ function RecordFrom({ fetchRecord }) {
   //   }
   // };
 
-  // const handleFileChange = async (e) => {
-  // const file = e.target.files[0];
-  // if (!file) return;
+  const handleFileChange = async (e) => {
+    const file = e.currentTarget.files[0];
+    console.log("🚀 ~ handleFileChange ~ file:", file);
 
-  // // FormData にファイルを詰め込む
-  // const formData = new FormData();
-  // formData.append("image", file);
+    const formData = new FormData(); // FormData の箱にファイルを詰め込む←ファイルをfetchする時は使わないといけないらしい
+    formData.append("image", file); //key image   val file   として格納　　postでimageしか見ない
 
-  // const res = await fetch("/api/upload-image", {
-  //   method: "POST",
-  //   body: formData,
-  // });
+    const res = await fetch("/api/upload-image", {
+      method: "POST",
+      body: formData,
+    });
 
-  // // JSON をパースして URL を取り出す
-  // const json = await res.json();
-  // const imageUrl = json.data.url;
+    // JSON をパースして URL を取り出す
+    const json = await res.json();
+    console.log("🚀 ~ handleFileChange ~ json:", json);
+    const imageUrl = json.url;
 
-  // console.log("😍😍😍😍😍😍アップロード先URL:", imageUrl);
-  //   setFile(e.target.value);
-  // };
-
-  // console.log("🚀 ~ RecordFrom ~ file:", record_photo_url);
+    console.log("😍😍😍😍😍😍アップロード先URL:", imageUrl);
+    setFile(imageUrl);
+  };
 
   //各入力項目の状態を　payload　にオブジェクトとして格納しpostする関数　payload内の変数はカラムに合わしてあげる必要有り！
   const handleSubmit = async () => {
-    const payload = {
-      record_type,
-      record_mood,
-      record_comment,
-      record_rating,
-      record_date: new Date(),
-    };
-    console.log("🚀 ~ handleSubmit ~ payload:", payload);
+    if (record_photo_url) {
+      const payload = {
+        record_type,
+        record_mood,
+        record_comment,
+        record_rating,
+        record_photo_url,
+        record_date: new Date(),
+      };
+      console.log("🚀 ~ handleSubmit ~ payload:", payload);
 
-    const req = await fetch("/api/records", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    console.log("🚀 ~ handleSubmit ~ req:", req);
-    fetchRecord();
+      const req = await fetch("/api/records", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      console.log("🚀 ~ handleSubmit ~ req:", req);
+      await fetchRecord();
+    }
     // setType("");
     // setMood("");
     // setComment("");
@@ -122,8 +123,8 @@ function RecordFrom({ fetchRecord }) {
         onChange={(e) => setComment(e.target.value)}
       />
       <Box>
-        <input type="file" accept="image/*" />
-        {/* <input type="file" accept="image/*" onChange={handleFileChange} /> */}
+        {/* <input type="file" accept="image/*" /> */}
+        <input type="file" accept="image/*" onChange={handleFileChange} />
       </Box>
       <Rating
         name="size-large"

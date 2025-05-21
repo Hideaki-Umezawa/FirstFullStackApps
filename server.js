@@ -4,8 +4,8 @@ const db = require("./db/index");
 const app = express();
 // const fetch = global.fetch || require("node-fetch");
 
-// const multer = require("multer");
-// const upload = multer(); // メモリストレージ
+const multer = require("multer");
+const upload = multer(); // メモリストレージ
 
 const PORT = process.env.PORT || 3000;
 
@@ -32,39 +32,36 @@ app.post("/api/records", async (req, res) => {
   res.status(201).json(newList);
 });
 
-// app.post("/api/upload-image", upload.single("image"), async (req, res) => {
-//   if (!req.file) {
-//     return res.status(400).send("No file");
-//   }
+//postされた画像をURLにして返す　　　express-fileupload／formidable／busboy とかでもいけそう？
+app.post("/api/upload-image", upload.single("image"), async (req, res) => {
+  console.log("/api/upload-image呼ばれた！");
 
-//   try {
-//     // ① バッファ→Base64
-//     const base64 = req.file.buffer.toString("base64");
+  // reqを文字列型にする　　URLSearchParamsしてるから必要
+  const base64 = req.file.buffer.toString("base64");
 
-//     // ② URLSearchParams に詰める（キーはクエリへ）
-//     const params = new URLSearchParams({
-//       image: base64,
-//       expiration: "864000",
-//     });
+  // バイナリ以外の方法は multipartからform-dataに切り替えてheaders
 
-//     // ③ imgbb API へ POST
-//     const imgbbRes = await fetch(
-//       `https://api.imgbb.com/1/upload?key=${process.env.IMGBB_API_KEY}`,
-//       {
-//         method: "POST",
-//         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-//         body: params,
-//       }
-//     );
+  //  URLSearchParams に詰める
+  //10日間（864000秒）
+  const params = new URLSearchParams({
+    image: base64,
+    expiration: "864000",
+  });
 
-//     const json = await imgbbRes.json();
-//     // ④ 返ってきた JSON をそのまま返す—or—URL だけ返す
-//     return res.json({ url: json.data.url });
-//   } catch (err) {
-//     console.error(err);
-//     return res.status(500).send("Upload error");
-//   }
-// });
+  // imgbb API へ POST
+  const imgbbRes = await fetch(
+    `https://api.imgbb.com/1/upload?key=${process.env.IMGBB_API_KEY}`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: params,
+    }
+  );
+
+  const json = await imgbbRes.json();
+  // ④ 返ってきた JSON をそのまま返す—or—URL だけ返す
+  return res.json({ url: json.data.url });
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

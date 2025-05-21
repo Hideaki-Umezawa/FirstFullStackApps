@@ -1,5 +1,5 @@
-import Header from "./assets/components/Header/Header";
-import Record from "./assets/components/RecordPage/Record";
+import Header from "./components/Header/Header";
+import Record from "./components/RecordPage/Record";
 
 function App() {
   return (
