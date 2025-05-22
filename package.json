@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "npm run migrate-latest && npm run seed-data && node server.js",
     "dev": "nodemon server.js",
     "build": "npm install && cd front && npm install && npm run build && rm -rf ../public && cp -r dist ../public",
     "migrate-latest": "npx knex migrate:latest --knexfile db/knexfile.js",
