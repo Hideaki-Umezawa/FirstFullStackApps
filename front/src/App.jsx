@@ -3,6 +3,7 @@ import Login from "./components/Login/Login";
 import Record from "./components/RecordPage/Record";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RecordList from "./components/RecordPage/RecordList";
+import { useContext } from "react";
 
 function App() {
   return (

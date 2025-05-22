@@ -1,19 +1,19 @@
+/* PAGE 全体のマージン・パディング */
 .record_page {
   margin-top: 20px;
-  float: left;
   padding: 1rem;
-  width: 97%;
-}
-/* 全体フォーマット 隙間*/
-.record_list {
-  display: grid;
-  gap: 1.5rem;
-  /* width: 100%; */
-  /* max-width: 1000px; */
-  margin: 0;
 }
 
-/* カードにしたい */
+/* レコード一覧：3列グリッドに */
+.record_list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem; /* カード間の余白 */
+  margin: 0 auto; /* 中央寄せしたい場合 */
+  max-width: 1200px; /* 全体の最大幅を制限 */
+}
+
+/* 各カード */
 .record_item {
   background: #d8fbcb;
   border-radius: 8px;
@@ -24,39 +24,29 @@
   align-items: flex-start;
 }
 
-/* ヘッダー部：日付・種類・評価を左右配置 */
+/* ヘッダー部：日付／種類／評価 */
 .record_header {
   width: 100%;
-  display: flex;
+  /* display: flex; */
   justify-content: space-between;
   align-items: baseline;
   margin-bottom: 0.75rem;
 }
 
-.record_header .record_date,
-.record_header .record_type {
-  margin-right: 0.5rem;
-  font-weight: bold;
-}
-
-.record_header .record_rating {
-  margin-left: auto;
-  color: #e07c24;
-}
-
-/* コメント */
+/* コメント本文 */
 .record_content {
-  margin: 0 0 0.75rem 0;
+  margin: 0 0 0.75rem;
   line-height: 1.4;
   color: #333;
 }
 
 /* 写真 */
 .record_photo {
-  max-width: 100%;
+  width: 100%; /* カード幅いっぱいに */
+  aspect-ratio: 4 / 3; /* 縦横比4:3固定 */
+  object-fit: cover; /* 中央切り抜き */
   border-radius: 4px;
   margin-bottom: 0.75rem;
-  object-fit: cover;
 }
 
 /* 追加情報 */
@@ -68,7 +58,7 @@
   margin-bottom: 0.75rem;
 }
 
-/* タイプ別 */
+/* タイプ別テキスト */
 .record_meal_type,
 .child_activity,
 .child_age,

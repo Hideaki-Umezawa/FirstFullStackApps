@@ -65,13 +65,13 @@ function RecordList({ records }) {
               )}
               {/* 共通項目(必須項目の為条件分岐なし) */}
               <div className="record_header">
-                <time className="record_date">{r.record_date}</time>
-                <span className="record_type">{r.record_type}</span>
-                <p className="record_content">{r.record_comment}</p>
+                {/* <time className="record_date">{r.record_date}</time> */}
+                <span className="record_type">カテゴリ：{r.record_type}</span>
+                <p className="record_content">コメント：{r.record_comment}</p>
+                <span className="record_mood">{r.record_mood}</span>
                 <span className="record_rating">
                   {"⭐".repeat(r.record_rating)}
                 </span>
-                <span className="record_mood">気分: {r.record_mood}</span>
               </div>
               {/* タイプ別オプション */}
               {r.record_type === "食事" && r.meal_type && (

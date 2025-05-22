@@ -37,7 +37,8 @@ exports.seed = async function (knex) {
       record_date: "2025-06-04",
       record_type: "髪型",
       record_comment: "今日の美容室の店員さん大当たり",
-      record_photo_url: "https://i.ibb.co/cKmk9xFF/ed9e84ad11ba.jpg",
+      record_photo_url:
+        "https://imgbp.hotp.jp/magazine/media/item_images/images/157/545/260/original/ad3c2473-1e46-45b1-9d14-84637a776a42.jpg",
       record_rating: 4,
       record_mood: "楽しい",
       salon: "おまかせ",
@@ -46,7 +47,8 @@ exports.seed = async function (knex) {
       record_date: "2025-06-05",
       record_type: "食事",
       record_comment: "焼肉パーティーした。めちゃうまだった",
-      record_photo_url: "https://i.ibb.co/qLKPdn5p/dc7f553ec041.jpg",
+      record_photo_url:
+        "https://as1.ftcdn.net/v2/jpg/05/02/69/00/1000_F_502690033_qmZLw884d9z00wbABWqE6R7sSTlwBC4p.jpg",
       record_rating: 5,
       record_mood: "楽しい",
       date_place: "家",
