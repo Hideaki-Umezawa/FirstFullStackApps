@@ -25,11 +25,11 @@ function Record() {
   return (
     <main className="record_page">
       <div className="record-container">
-        <div className="record-list-wrapper">
-          <RecordList records={records} />
-        </div>
         <div className="record-form-wrapper">
           <RecordForm fetchRecord={fetchRecord} />
+        </div>
+        <div className="record-list-wrapper">
+          <RecordList records={records} />
         </div>
       </div>
     </main>

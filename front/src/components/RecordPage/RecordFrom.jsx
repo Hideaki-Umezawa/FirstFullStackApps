@@ -1,8 +1,12 @@
 import { useState, useEffect, useContext, useRef } from "react";
 // prettier-ignore
-import {Box,Button,TextField,MenuItem,FormControl,InputLabel,Select,Autocomplete,TextareaAutosize,Rating} from "@mui/material";
+import {Modal,Box,Button,TextField,MenuItem,FormControl,InputLabel,Select,Autocomplete,TextareaAutosize,Rating} from "@mui/material";
 
 function RecordFrom({ fetchRecord }) {
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   // const [area, setArea] = useState();
   // const [areaError, setAreaError] = useState(false);
 
@@ -11,6 +15,7 @@ function RecordFrom({ fetchRecord }) {
   const [record_comment, setComment] = useState("");
   const [record_rating, setRating] = useState(5);
   const [record_photo_url, setFile] = useState(null);
+  // const fileInputRef = useRef(null);
 
   // prettier-ignore
   const recordMoodArray = ["楽しい","疲れた","リラックス","ワクワク","悲しい",];
@@ -76,66 +81,95 @@ function RecordFrom({ fetchRecord }) {
         body: JSON.stringify(payload),
       });
       console.log("🚀 ~ handleSubmit ~ req:", req);
+
       await fetchRecord();
+
+      setType("");
+      setMood("");
+      setComment("");
+      setRating(5);
+      setFile(null);
     }
-    // setType("");
-    // setMood("");
-    // setComment("");
-    // setRating(5);
   };
   return (
-    <main className="record_from">
-      <h1>今日の出来事を投稿してみよう！</h1>
-      <Autocomplete
-        options={recordTypeArray}
-        onChange={(e) => setType(e.target.innerHTML)}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="分類選択"
-            style={TextFieldStyle}
-            // onBlur={onBlurArea}
-            // error={areaError}
-            // helperText={areaError ? "分類を入力してください" : ""}
-          />
-        )}
-      />
-      <Autocomplete
-        options={recordMoodArray}
-        onChange={(e) => setMood(e.target.innerHTML)}
-        // onChange={onChangeArea}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="気分選択"
-            style={TextFieldStyle}
-            // onBlur={onBlurArea}
-            // error={areaError}
-            // helperText={areaError ? "気分を入力してください" : ""}
-          />
-        )}
-      />
-      <TextareaAutosize
-        aria-label="minimum height"
-        minRows={10}
-        maxRows={30}
-        placeholder="コメント欄"
-        onChange={(e) => setComment(e.target.value)}
-      />
-      <Box>
-        {/* <input type="file" accept="image/*" /> */}
-        <input type="file" accept="image/*" onChange={handleFileChange} />
+    <>
+      <Box
+        sx={{
+          display: "flex",
+          marginTop: "50px",
+          height: 70,
+        }}
+      >
+        <h1>日々の出来事を記録しよう！ ⇨</h1>
+        <Button
+          sx={{
+            backgroundColor: "rgb(177, 243, 249)",
+            width: 150,
+            marginTop: "20px",
+          }}
+          onClick={handleOpen}
+        >
+          フォームを開く
+        </Button>
       </Box>
-      <Rating
-        name="size-large"
-        defaultValue={5}
-        size="large"
-        onChange={(_, e) => setRating(e)}
-      />
-      <Button variant="contained" onClick={handleSubmit}>
-        投稿
-      </Button>
-    </main>
+
+      <Modal open={open} onClose={handleClose}>
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 400,
+            bgcolor: "background.paper",
+            borderRadius: 2,
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          <Autocomplete
+            value={record_type}
+            options={recordTypeArray}
+            onChange={(val, e) => setType(e)}
+            renderInput={(params) => (
+              <TextField {...params} label="分類選択" style={TextFieldStyle} />
+            )}
+          />
+          <Autocomplete
+            value={record_mood}
+            options={recordMoodArray}
+            onChange={(val, e) => setMood(e)}
+            renderInput={(params) => (
+              <TextField {...params} label="気分選択" style={TextFieldStyle} />
+            )}
+          />
+          <TextareaAutosize
+            value={record_comment}
+            aria-label="minimum height"
+            minRows={5}
+            maxRows={10}
+            placeholder="コメント欄"
+            style={{ width: "100%", marginTop: "1rem" }}
+            onChange={(e) => setComment(e.target.value)}
+          />
+          <Box sx={{ mt: 2 }}>
+            <input type="file" accept="image/*" onChange={handleFileChange} />
+          </Box>
+          <Box sx={{ mt: 2 }}>
+            <Rating
+              value={record_rating}
+              name="size-large"
+              defaultValue={5}
+              size="large"
+              onChange={(_, newValue) => setRating(newValue)}
+            />
+          </Box>
+          <Button variant="contained" onClick={handleSubmit} sx={{ mt: 2 }}>
+            投稿
+          </Button>
+        </Box>
+      </Modal>
+    </>
   );
 }
 
