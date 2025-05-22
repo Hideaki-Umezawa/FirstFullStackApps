@@ -1,18 +1,16 @@
-/* Record.css */
 .record-container {
   display: flex;
-  gap: 24px; /* リストとフォームの間隔 */
+  gap: 24px; /* 間隔 */
   align-items: flex-start;
-  padding: 16px; /* 必要に応じて余白を調整 */
+  padding: 16px;
 }
 
-/* 各コンポーネントの幅を制限したい場合 */
 .record-list-wrapper {
-  flex: 1; /* リスト側を余白いっぱいに伸ばす */
-  max-width: 600px; /* 最大幅を設定 */
+  flex: 1;
+  max-width: 600px;
 }
 
 .record-form-wrapper {
-  flex: 1; /* フォーム側も同様に */
+  flex: 1;
   max-width: 400px;
 }
