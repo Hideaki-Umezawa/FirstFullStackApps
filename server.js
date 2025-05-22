@@ -24,6 +24,7 @@ app.get("/api/records", async (req, res) => {
     const list = await db("records").select("*").orderBy("created_at", "desc");
     res.status(200).json(list);
   } catch (err) {
+    console.error("🔥 /api/records error:", err.message);
     res.status(500).json({ error: err.message });
   }
 });
