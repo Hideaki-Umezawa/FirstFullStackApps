@@ -34,7 +34,7 @@ const LoginCard = styled("div")({
 });
 
 function Login() {
-  const { user, login } = useContext("");
+  //   const { user, login } = useContext("");
   return (
     <Container>
       <LoginCard>
