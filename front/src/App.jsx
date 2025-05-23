@@ -14,7 +14,6 @@ function App() {
           <Route path="/" element={<Record />} />
           <Route path="/login" element={<Login />} />
           <Route path="/records" element={<RecordList />} />
-          {/* <Route path="*" element={<Login to="/login" replace />} /> */}
         </Routes>
       </BrowserRouter>
     </>
